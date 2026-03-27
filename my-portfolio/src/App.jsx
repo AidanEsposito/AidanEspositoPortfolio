@@ -1,37 +1,52 @@
+import Projects from "/src/Projects.jsx";
 import { useState } from 'react'
 import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
+  const [index, setIndex] = useState(0);
+
+
 
   return (
-    <header class="w-full bg-gray-800 text-white py-4">
-      <div class="max-w-7xl mx-auto flex justify-between items-center px-8">
-        <h1 class="text-xl font-bold">Aidan</h1>
-        <nav class="flex gap-6">
-          <a href="#home" class="hover:text-blue-400">Home</a>
-          <a href="#projects" class="hover:text-blue-400">Projects</a>
-          <a href="#about" class="hover:text-blue-400">About</a>
-          <a href="#contact" class="hover:text-blue-400">Contact</a>
-        </nav>
-      </div>
-    </header>
+    <>
+      {/* Header */}
+      <header className="w-full bg-gray-800 text-white py-4">
+        <div className="max-w-7xl mx-auto flex justify-between items-center px-4">
+          
+          <img 
+            className="block h-24 rounded-full sm:shrink-0" 
+            src="/aidane.jfif" 
+            alt="Profile Picture" 
+          />
 
-    /*Hero Section*/
-      /*Short intro about me, maybe a picture, and a call to action button to view projects or contact me*/
+          <h1 className="text-xl font-bold">Aidan Esposito</h1>
 
-    /*Projects Section*/
-      /*Showcase of my projects with images, descriptions, and links to live demos or GitHub repos*/
+          <nav className="flex gap-4">
+            <a href="#home" className="hover:text-blue-400">Home</a>
+            <a href="#projects" className="hover:text-blue-400">Projects</a>
+            <a href="#about" className="hover:text-blue-400">About</a>
+            <a href="#contact" className="hover:text-blue-400">Contact</a>
+          </nav>
+        </div>
+      </header>
 
-    /*About Section*/
-      /*More detailed information about me, my skills, and my experience*/
-      
-    /*Contact Section*/
-      /*A contact form or links to my social media profiles and email address*/
+      {/* Hero Section */}
+      <section className="text-center py-16">
+        <h2 className="text-3xl font-bold mb-4">About Me</h2>
+        <p className="max-w-2xl mx-auto text-lg">
+          Hello! I'm Aidan, a recent graduate software developer from Loyola Marymount University with a passion for creating innovative solutions.
+          I have experience in full-stack development, databases, and cloud technologies, and I'm always eager to learn new technologies and take on exciting projects.
+        </p>
+      </section>
 
-    /*Footer*/
+      {/* Projects Section */}
+      <Projects />
+    </>
+
     
   )
 }
 
 export default App
+
