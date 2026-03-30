@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Projects() {
   const [index, setIndex] = useState(0);
@@ -31,16 +32,16 @@ export default function Projects() {
   ];
 
   const next = () => {
-        setIndex(prevIndex => {
-            return prevIndex + 3 >= projects.length ? 0 : prevIndex + 1;
-        });
-    };
+    setIndex(prevIndex =>
+      prevIndex + 3 >= projects.length ? 0 : prevIndex + 1
+    );
+  };
 
-    const prev = () => {
-        setIndex(prevIndex => {
-            return prevIndex === 0 ? Math.max(projects.length - 3, 0) : prevIndex - 1;
-        });
-    };
+  const prev = () => {
+    setIndex(prevIndex =>
+      prevIndex === 0 ? Math.max(projects.length - 3, 0) : prevIndex - 1
+    );
+  };
 
   return (
     <section className="bg-gray-100 py-16" id="projects">
@@ -55,45 +56,57 @@ export default function Projects() {
           {/* Left Button */}
           <button
             onClick={prev}
-            disabled={index === 0}
-            className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400 disabled:opacity-50"
+            className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400"
           >
             ←
           </button>
 
-          {/* Projects */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
-            
-            {projects.slice(index, index + 3).map((project, i) => (
-              <div key={i} className="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition">
-                
-                <img
-                  src={project.logo}
-                  alt={project.name}
-                  className="h-16 mx-auto mb-4 object-contain"
-                />
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, x: 80 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -80 }}
+              transition={{ duration: 0.4 }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full"
+            >
+              {projects.slice(index, index + 3).map((project, i) => (
+                <div
+                  key={i}
+                  className="bg-white rounded-lg shadow-md p-6 text-center 
+                  transition duration-300 transform hover:-translate-y-2 hover:scale-105 hover:shadow-xl"
+                >
+                  <img
+                    src={project.logo}
+                    alt={project.name}
+                    className="h-16 mx-auto mb-4 object-contain"
+                  />
 
-                <h3 className="text-xl font-semibold mb-2">
-                  {project.name}
-                </h3>
+                  <h3 className="text-xl font-semibold mb-2">
+                    {project.name}
+                  </h3>
 
-                <p className="text-gray-700 mb-4">
-                  {project.desc}
-                </p>
+                  <p className="text-gray-700 mb-4">
+                    {project.desc}
+                  </p>
 
-                <a href={project.link} className="text-blue-500 hover:underline">
-                  View Project
-                </a>
-              </div>
-            ))}
-
-          </div>
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500 hover:underline"
+                  >
+                    View Project
+                  </a>
+                </div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
 
           {/* Right Button */}
           <button
             onClick={next}
-            disabled={index + 3 >= projects.length}
-            className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400 disabled:opacity-50"
+            className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400"
           >
             →
           </button>
